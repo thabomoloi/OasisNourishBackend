@@ -1,11 +1,9 @@
 package com.oasisnourish.models;
 
 import com.oasisnourish.enums.AccountStatus;
-import com.oasisnourish.enums.Permission;
 import com.oasisnourish.enums.Role;
 
-import java.time.LocalDateTime;
-import java.util.Set;
+import java.time.Instant;
 
 public class User extends EntityBase {
     private String firstName;
@@ -20,10 +18,17 @@ public class User extends EntityBase {
 
     private AccountStatus accountStatus;
     private int loginAttempts;
-    private LocalDateTime lastLoginAt;
+    private Instant lastLoginAt;
 
     private Role role;
-    private Set<Permission> permissions;
+
+    public User() {
+        id = 0;
+        role = Role.USER;
+        accountStatus = AccountStatus.UNVERIFIED;
+        twoFactorEnabled = false;
+        loginAttempts = 0;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -97,11 +102,19 @@ public class User extends EntityBase {
         this.loginAttempts = loginAttempts;
     }
 
-    public LocalDateTime getLastLoginAt() {
+    public Instant getLastLoginAt() {
         return lastLoginAt;
     }
 
-    public void setLastLoginAt(LocalDateTime lastLoginAt) {
+    public void setLastLoginAt(Instant lastLoginAt) {
         this.lastLoginAt = lastLoginAt;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
