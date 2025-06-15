@@ -10,6 +10,8 @@ import com.oasisnourish.enums.AccountStatus;
 import com.oasisnourish.enums.Role;
 import com.oasisnourish.models.User;
 
+import static com.oasisnourish.db.constants.UserTable.*;
+
 /**
  * Implementation of {@link EntityRowMapper} for {@link User} entity.
  */
@@ -26,8 +28,8 @@ public class UserRowMapper implements EntityRowMapper<User> {
         statement.setString(7, user.getTwoFactorSecret());
         statement.setString(8, user.getAccountStatus().name());
         statement.setInt(9, user.getLoginAttempts());
-        statement.setString(10, user.getRole().name());
-        statement.setTimestamp(11, Timestamp.from(user.getLastLoginAt()));
+        statement.setTimestamp(10, Timestamp.from(user.getLastLoginAt()));
+        statement.setString(11, user.getRole().name());
 
         if (includeId) {
             statement.setLong(12, user.getId());
@@ -37,19 +39,19 @@ public class UserRowMapper implements EntityRowMapper<User> {
     @Override
     public User mapToEntity(ResultSet resultSet) throws SQLException {
         User user = new User();
-        user.setId(resultSet.getLong("id"));
-        user.setFirstName(resultSet.getString("first_name"));
-        user.setLastName(resultSet.getString("last_name"));
-        user.setEmail(resultSet.getString("email"));
-        user.setPhoneNumber(resultSet.getString("phone_number"));
-        user.setPasswordHash(resultSet.getString("password_hash"));
-        user.setTwoFactorEnabled(resultSet.getBoolean("two_factor_enabled"));
-        user.setTwoFactorSecret(resultSet.getString("two_factor_secret"));
-        user.setAccountStatus(AccountStatus.valueOf(resultSet.getString("account_status")));
-        user.setLoginAttempts(resultSet.getInt("login_attempts"));
-        var timestamp = resultSet.getTimestamp("last_login_at");
+        user.setId(resultSet.getLong(ID));
+        user.setFirstName(resultSet.getString(FIRST_NAME));
+        user.setLastName(resultSet.getString(LAST_NAME));
+        user.setEmail(resultSet.getString(EMAIL));
+        user.setPhoneNumber(resultSet.getString(PHONE_NUMBER));
+        user.setPasswordHash(resultSet.getString(PASSWORD_HASH));
+        user.setTwoFactorEnabled(resultSet.getBoolean(TWO_FACTOR_ENABLED));
+        user.setTwoFactorSecret(resultSet.getString(TWO_FACTOR_SECRET));
+        user.setAccountStatus(AccountStatus.valueOf(resultSet.getString(ACCOUNT_STATUS)));
+        user.setLoginAttempts(resultSet.getInt(LOGIN_ATTEMPTS));
+        var timestamp = resultSet.getTimestamp(LAST_LOGIN_AT);
         user.setLastLoginAt(timestamp == null ? null : timestamp.toInstant());
-        user.setRole(Role.valueOf(resultSet.getString("role")));
+        user.setRole(Role.valueOf(resultSet.getString(ROLE)));
         return user;
     }
 }

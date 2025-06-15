@@ -30,6 +30,34 @@ public class User extends EntityBase {
         loginAttempts = 0;
     }
 
+    public User(
+            long id,
+            String firstName,
+            String lastName,
+            String email,
+            String phoneNumber,
+            String passwordHash,
+            boolean twoFactorEnabled,
+            String twoFactorSecret,
+            AccountStatus accountStatus,
+            int loginAttempts,
+            Instant lastLoginAt,
+            Role role
+    ) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.passwordHash = passwordHash;
+        this.twoFactorEnabled = twoFactorEnabled;
+        this.twoFactorSecret = twoFactorSecret;
+        this.accountStatus = accountStatus;
+        this.loginAttempts = loginAttempts;
+        this.lastLoginAt = lastLoginAt;
+        this.role = role;
+    }
+
     public String getFirstName() {
         return firstName;
     }
