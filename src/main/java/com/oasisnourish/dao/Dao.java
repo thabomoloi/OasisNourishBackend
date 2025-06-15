@@ -2,6 +2,7 @@ package com.oasisnourish.dao;
 
 import com.oasisnourish.models.EntityBase;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -25,7 +26,7 @@ public interface Dao<T extends EntityBase> {
      *
      * @return list of all entities.
      */
-    Iterable<T> findAll();
+    List<T> findAll();
 
     /**
      * Creates new entity of type {@link  T} to the database.

@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.Instant;
 
-import static com.oasisnourish.db.constants.UserTable.*;
+import static com.oasisnourish.db.constants.UserTableConstants.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.*;
@@ -85,18 +85,18 @@ public class UserRowMapperTest {
     @Test
     void mapToEntity_shouldMapCorrectly() throws SQLException {
         // Arrange
-        when(resultSet.getLong(ID)).thenReturn(user.getId());
-        when(resultSet.getString(FIRST_NAME)).thenReturn(user.getFirstName());
-        when(resultSet.getString(LAST_NAME)).thenReturn(user.getLastName());
-        when(resultSet.getString(EMAIL)).thenReturn(user.getEmail());
-        when(resultSet.getString(PHONE_NUMBER)).thenReturn(user.getPhoneNumber());
-        when(resultSet.getString(PASSWORD_HASH)).thenReturn(user.getPasswordHash());
-        when(resultSet.getBoolean(TWO_FACTOR_ENABLED)).thenReturn(user.isTwoFactorEnabled());
-        when(resultSet.getString(TWO_FACTOR_SECRET)).thenReturn(user.getTwoFactorSecret());
-        when(resultSet.getString(ACCOUNT_STATUS)).thenReturn(user.getAccountStatus().name());
-        when(resultSet.getInt(LOGIN_ATTEMPTS)).thenReturn(user.getLoginAttempts());
-        when(resultSet.getTimestamp(LAST_LOGIN_AT)).thenReturn(Timestamp.from(user.getLastLoginAt()));
-        when(resultSet.getString(ROLE)).thenReturn(user.getRole().name());
+        when(resultSet.getLong(COLUMN_ID)).thenReturn(user.getId());
+        when(resultSet.getString(COLUMN_FIRST_NAME)).thenReturn(user.getFirstName());
+        when(resultSet.getString(COLUMN_LAST_NAME)).thenReturn(user.getLastName());
+        when(resultSet.getString(COLUMN_EMAIL)).thenReturn(user.getEmail());
+        when(resultSet.getString(COLUMN_PHONE_NUMBER)).thenReturn(user.getPhoneNumber());
+        when(resultSet.getString(COLUMN_PASSWORD_HASH)).thenReturn(user.getPasswordHash());
+        when(resultSet.getBoolean(COLUMN_TWO_FACTOR_ENABLED)).thenReturn(user.isTwoFactorEnabled());
+        when(resultSet.getString(COLUMN_TWO_FACTOR_SECRET)).thenReturn(user.getTwoFactorSecret());
+        when(resultSet.getString(COLUMN_ACCOUNT_STATUS)).thenReturn(user.getAccountStatus().name());
+        when(resultSet.getInt(COLUMN_LOGIN_ATTEMPTS)).thenReturn(user.getLoginAttempts());
+        when(resultSet.getTimestamp(COLUMN_LAST_LOGIN_AT)).thenReturn(Timestamp.from(user.getLastLoginAt()));
+        when(resultSet.getString(COLUMN_ROLE)).thenReturn(user.getRole().name());
 
         // Act
         var entity = userRowMapper.mapToEntity(resultSet);
@@ -119,18 +119,18 @@ public class UserRowMapperTest {
     @Test
     void mapToEntity_shouldHandleNullTimestamp() throws SQLException {
         // Arrange
-        when(resultSet.getLong(ID)).thenReturn(user.getId());
-        when(resultSet.getString(FIRST_NAME)).thenReturn(user.getFirstName());
-        when(resultSet.getString(LAST_NAME)).thenReturn(user.getLastName());
-        when(resultSet.getString(EMAIL)).thenReturn(user.getEmail());
-        when(resultSet.getString(PHONE_NUMBER)).thenReturn(user.getPhoneNumber());
-        when(resultSet.getString(PASSWORD_HASH)).thenReturn(user.getPasswordHash());
-        when(resultSet.getBoolean(TWO_FACTOR_ENABLED)).thenReturn(user.isTwoFactorEnabled());
-        when(resultSet.getString(TWO_FACTOR_SECRET)).thenReturn(user.getTwoFactorSecret());
-        when(resultSet.getString(ACCOUNT_STATUS)).thenReturn(user.getAccountStatus().name());
-        when(resultSet.getInt(LOGIN_ATTEMPTS)).thenReturn(user.getLoginAttempts());
-        when(resultSet.getTimestamp(LAST_LOGIN_AT)).thenReturn(null);
-        when(resultSet.getString(ROLE)).thenReturn(user.getRole().name());
+        when(resultSet.getLong(COLUMN_ID)).thenReturn(user.getId());
+        when(resultSet.getString(COLUMN_FIRST_NAME)).thenReturn(user.getFirstName());
+        when(resultSet.getString(COLUMN_LAST_NAME)).thenReturn(user.getLastName());
+        when(resultSet.getString(COLUMN_EMAIL)).thenReturn(user.getEmail());
+        when(resultSet.getString(COLUMN_PHONE_NUMBER)).thenReturn(user.getPhoneNumber());
+        when(resultSet.getString(COLUMN_PASSWORD_HASH)).thenReturn(user.getPasswordHash());
+        when(resultSet.getBoolean(COLUMN_TWO_FACTOR_ENABLED)).thenReturn(user.isTwoFactorEnabled());
+        when(resultSet.getString(COLUMN_TWO_FACTOR_SECRET)).thenReturn(user.getTwoFactorSecret());
+        when(resultSet.getString(COLUMN_ACCOUNT_STATUS)).thenReturn(user.getAccountStatus().name());
+        when(resultSet.getInt(COLUMN_LOGIN_ATTEMPTS)).thenReturn(user.getLoginAttempts());
+        when(resultSet.getTimestamp(COLUMN_LAST_LOGIN_AT)).thenReturn(null);
+        when(resultSet.getString(COLUMN_ROLE)).thenReturn(user.getRole().name());
 
         // Act
         var entity = userRowMapper.mapToEntity(resultSet);

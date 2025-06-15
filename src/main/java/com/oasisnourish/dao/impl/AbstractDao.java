@@ -56,9 +56,9 @@ public abstract class AbstractDao<T extends EntityBase> {
      *
      * @param sql a SQL query string with '?' placeholders, not user input
      * @param consumer a lambda that sets PreparedStatement parameters
-     * @return an Iterable containing the mapped entities
+     * @return a list containing the mapped entities
      */
-    protected Iterable<T> queryMultiple(String sql, PreparedStatementConsumer consumer) {
+    protected List<T> queryMultiple(String sql, PreparedStatementConsumer consumer) {
         List<T> results = new ArrayList<>();
 
         try (Connection connection = jdbcConnection.getConnection()) {

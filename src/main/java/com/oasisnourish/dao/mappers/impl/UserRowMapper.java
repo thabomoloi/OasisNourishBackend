@@ -10,7 +10,7 @@ import com.oasisnourish.enums.AccountStatus;
 import com.oasisnourish.enums.Role;
 import com.oasisnourish.models.User;
 
-import static com.oasisnourish.db.constants.UserTable.*;
+import static com.oasisnourish.db.constants.UserTableConstants.*;
 
 /**
  * Implementation of {@link EntityRowMapper} for {@link User} entity.
@@ -39,19 +39,19 @@ public class UserRowMapper implements EntityRowMapper<User> {
     @Override
     public User mapToEntity(ResultSet resultSet) throws SQLException {
         User user = new User();
-        user.setId(resultSet.getLong(ID));
-        user.setFirstName(resultSet.getString(FIRST_NAME));
-        user.setLastName(resultSet.getString(LAST_NAME));
-        user.setEmail(resultSet.getString(EMAIL));
-        user.setPhoneNumber(resultSet.getString(PHONE_NUMBER));
-        user.setPasswordHash(resultSet.getString(PASSWORD_HASH));
-        user.setTwoFactorEnabled(resultSet.getBoolean(TWO_FACTOR_ENABLED));
-        user.setTwoFactorSecret(resultSet.getString(TWO_FACTOR_SECRET));
-        user.setAccountStatus(AccountStatus.valueOf(resultSet.getString(ACCOUNT_STATUS)));
-        user.setLoginAttempts(resultSet.getInt(LOGIN_ATTEMPTS));
-        var timestamp = resultSet.getTimestamp(LAST_LOGIN_AT);
+        user.setId(resultSet.getLong(COLUMN_ID));
+        user.setFirstName(resultSet.getString(COLUMN_FIRST_NAME));
+        user.setLastName(resultSet.getString(COLUMN_LAST_NAME));
+        user.setEmail(resultSet.getString(COLUMN_EMAIL));
+        user.setPhoneNumber(resultSet.getString(COLUMN_PHONE_NUMBER));
+        user.setPasswordHash(resultSet.getString(COLUMN_PASSWORD_HASH));
+        user.setTwoFactorEnabled(resultSet.getBoolean(COLUMN_TWO_FACTOR_ENABLED));
+        user.setTwoFactorSecret(resultSet.getString(COLUMN_TWO_FACTOR_SECRET));
+        user.setAccountStatus(AccountStatus.valueOf(resultSet.getString(COLUMN_ACCOUNT_STATUS)));
+        user.setLoginAttempts(resultSet.getInt(COLUMN_LOGIN_ATTEMPTS));
+        var timestamp = resultSet.getTimestamp(COLUMN_LAST_LOGIN_AT);
         user.setLastLoginAt(timestamp == null ? null : timestamp.toInstant());
-        user.setRole(Role.valueOf(resultSet.getString(ROLE)));
+        user.setRole(Role.valueOf(resultSet.getString(COLUMN_ROLE)));
         return user;
     }
 }
