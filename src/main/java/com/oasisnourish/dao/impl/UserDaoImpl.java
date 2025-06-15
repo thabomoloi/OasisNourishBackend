@@ -36,16 +36,16 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     @Override
     public void create(User user) {
-        executeUpdate(SQL_CREATE, ps -> entityRowMapper.mapToRow(ps, user, true), null);
+        executeUpdate(SQL_CREATE, ps -> entityRowMapper.mapToRow(ps, user, false), rs -> user.setId(rs.getLong(1)));
     }
 
     @Override
     public void update(User user) {
-        executeUpdate(SQL_UPDATE, ps -> entityRowMapper.mapToRow(ps, user, false), null);
+        executeUpdate(SQL_UPDATE, ps -> entityRowMapper.mapToRow(ps, user, true), null);
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(long id) {
         executeUpdate(SQL_DELETE, ps -> ps.setLong(1, id), null);
     }
 }

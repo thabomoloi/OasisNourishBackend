@@ -92,9 +92,11 @@ public abstract class AbstractDao<T extends EntityBase> {
                 consumer.accept(ps);
                 ps.executeUpdate();
 
-                try (ResultSet rs = ps.getGeneratedKeys()) {
-                    if (rs.next()) {
-                        resultSetConsumer.accept(rs);
+                if (resultSetConsumer != null) {
+                    try (ResultSet rs = ps.getGeneratedKeys()) {
+                        if (rs.next()) {
+                            resultSetConsumer.accept(rs);
+                        }
                     }
                 }
             }

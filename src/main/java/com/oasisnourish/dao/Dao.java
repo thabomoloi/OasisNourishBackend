@@ -47,5 +47,5 @@ public interface Dao<T extends EntityBase> {
      *
      * @param id the ID of the entity to delete.
      */
-    void delete(int id);
+    void delete(long id);
 }
